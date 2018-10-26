@@ -1,4 +1,6 @@
-﻿namespace LoggingKata
+﻿using System;
+
+namespace LoggingKata
 {
     /// <summary>
     /// Parses a POI file to locate all the Taco Bells
@@ -11,8 +13,79 @@
         {
             logger.LogInfo("Begin parsing");
 
+            if(line == null)
+            {
+                logger.LogWarning("Line was null");
+                return null;
+            }
+            // Take your line and use line.Split(',') to split it up into an array of strings, separated by the char ','
+            var cells = line.Split(',');
+
             // Do not fail if one record parsing fails, return null
-            return null; // TODO Implement
+            // If your array.Length is less than 3, something went wrong
+            if (cells.Length < 3 || cells.Length > 3)
+            {
+                // Log that and return null
+                logger.LogWarning("The length was the array less than 3");
+                return null;
+            }
+            TacoBell tb = new TacoBell();
+            Point tbPoint = new Point();
+
+
+
+            // grab the latitude from your array at index 0
+            //validate the latitude if not log the error
+            try
+            {
+                tbPoint.Latitude = Convert.ToDouble(cells[0]);
+            }
+            catch (Exception)
+            {
+
+                logger.LogError("Not a Number");
+                return null;
+            }
+            if(tbPoint.Latitude < -90 || tbPoint.Latitude > 90)
+            {
+                logger.LogWarning("Not a Valid Latitude.");
+                return null;
+            }
+            
+            // grab the longitude from your array at index 1
+            // validate the longitude if not log the error   
+            try
+            {
+                tbPoint.Longitude = Convert.ToDouble(cells[1]);
+            }
+            catch (Exception)
+            {
+
+                logger.LogError("Not a Number");
+                return null;
+            }
+            
+            if (tbPoint.Longitude < -180 || tbPoint.Longitude > 180)
+            {
+                logger.LogWarning("Not a Valid Longitude");
+                return null;
+            }
+            // grab the name from your array at index 2
+            // validate the name if not log the error
+            var name = cells[2].Trim();
+            if (name.Length < 9 || name.Substring(0, 9) != "Taco Bell")
+            {
+                logger.LogWarning("Not a Valid location");
+                return null;
+            }
+            
+           
+            
+            tb.Name = name;
+            tb.Location = tbPoint;
+            
+            
+            return tb;
         }
     }
 }

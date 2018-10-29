@@ -29,8 +29,8 @@ namespace LoggingKata
                 logger.LogWarning("The length was the array less than 3");
                 return null;
             }
-            TacoBell tb = new TacoBell();
-            Point tbPoint = new Point();
+            TacoBell tacoBellLocation = new TacoBell();
+            Point tacoBellLocationPoint = new Point();
 
 
 
@@ -38,7 +38,7 @@ namespace LoggingKata
             //validate the latitude if not log the error
             try
             {
-                tbPoint.Latitude = Convert.ToDouble(cells[0]);
+                tacoBellLocationPoint.Latitude = Convert.ToDouble(cells[0]);
             }
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace LoggingKata
                 logger.LogError("Not a Number");
                 return null;
             }
-            if(tbPoint.Latitude < -90 || tbPoint.Latitude > 90)
+            if (tacoBellLocationPoint.Latitude < -90 || tacoBellLocationPoint.Latitude > 90)
             {
                 logger.LogWarning("Not a Valid Latitude.");
                 return null;
@@ -56,7 +56,7 @@ namespace LoggingKata
             // validate the longitude if not log the error   
             try
             {
-                tbPoint.Longitude = Convert.ToDouble(cells[1]);
+                tacoBellLocationPoint.Longitude = Convert.ToDouble(cells[1]);
             }
             catch (Exception)
             {
@@ -65,7 +65,7 @@ namespace LoggingKata
                 return null;
             }
             
-            if (tbPoint.Longitude < -180 || tbPoint.Longitude > 180)
+            if (tacoBellLocationPoint.Longitude < -180 || tacoBellLocationPoint.Longitude > 180)
             {
                 logger.LogWarning("Not a Valid Longitude");
                 return null;
@@ -78,14 +78,14 @@ namespace LoggingKata
                 logger.LogWarning("Not a Valid location");
                 return null;
             }
+
+
+
+            tacoBellLocation.Name = name;
+            tacoBellLocation.Location = tacoBellLocationPoint;
             
-           
             
-            tb.Name = name;
-            tb.Location = tbPoint;
-            
-            
-            return tb;
+            return tacoBellLocation;
         }
     }
 }

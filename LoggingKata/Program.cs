@@ -43,13 +43,13 @@ namespace LoggingKata
             {
                 var locA = location.Location;
                 GeoCoordinate pin1 = new GeoCoordinate(locA.Latitude,locA.Longitude);
-                //Itrack1 = location;
+   
                 foreach (var locationB in locations)
                 {
                     var locB = locationB.Location; 
                     GeoCoordinate pin2 = new GeoCoordinate(locB.Latitude,locB.Longitude);
                     dist = pin1.GetDistanceTo(pin2);
-                    //Console.WriteLine(dist);
+                    
                     if (dist > lognestDist)
                     {
                         lognestDist = dist;

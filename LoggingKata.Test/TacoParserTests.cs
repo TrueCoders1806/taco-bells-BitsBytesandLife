@@ -8,7 +8,7 @@ namespace LoggingKata.Test
         [Fact]
         public void ShouldDoSomething()
         {
-            // TODO: Complete Something, if anything
+            // Currently not used
         }
 
         [Theory]
@@ -41,7 +41,7 @@ namespace LoggingKata.Test
         [InlineData("0,0,Wendy's")]
         public void ShouldFailParse(string str)
         {
-            // TODO: Complete Should Fail Parse
+            
             //Arrange
             var parser = new TacoParser();
             //Act

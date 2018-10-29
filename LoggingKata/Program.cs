@@ -27,41 +27,41 @@ namespace LoggingKata
             ITrackable Itrack1 = null;
             ITrackable Itrack2 = null;
             double dist = 0;
-            double lognestDist = 0;
+            double longestDistance = 0;
 
-            // TODO:  Find the two Taco Bells in Alabama that are the furthest from one another.
-            // HINT:  You'll need two nested forloops
-            // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
-            // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
-            // Create a new corA Coordinate with your locA's lat and long
-            // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
-            // Create a new Coordinate with your locB's lat and long
-            // Now, compare the two using `.GetDistanceTo()`, which returns a double
-            // If the distance is greater than the currently saved distance, update the distance and the two `ITrackable` variables you set above
-            // double distanceBetween = pin1.GetDistanceTo(pin2);
+            //First loop: loop over all of the all of the locations
             foreach (var location in locations)
             {
+                //Grabbing a location from loop (locations)
                 var locA = location.Location;
+                //Creating a new GeoCoordinate with locA's latitude and longitude
                 GeoCoordinate pin1 = new GeoCoordinate(locA.Latitude,locA.Longitude);
-   
+
+                //Second loop: loop on the locations with the scope of your first loop, 
+                //so you can grab the "destination": locB
                 foreach (var locationB in locations)
                 {
-                    var locB = locationB.Location; 
+                    //Grabbing a location from loop (locations)
+                    var locB = locationB.Location;
+                    //Creating a new GeoCoordinate with locB's latitude and longitude
                     GeoCoordinate pin2 = new GeoCoordinate(locB.Latitude,locB.Longitude);
+
+                    // Now, compare the two using `.GetDistanceTo()`, which returns a double
+                    // If the distance is greater than the currently saved distance, update the distance and the two `ITrackable` variables you set above
+                    // double distanceBetween = pin1.GetDistanceTo(pin2);
                     dist = pin1.GetDistanceTo(pin2);
-                    
-                    if (dist > lognestDist)
+                    if (dist > longestDistance)
                     {
-                        lognestDist = dist;
+                        longestDistance = dist;
                         Itrack1 = location;
                         Itrack2 = locationB;
                     }
                 }
 
             }
-
-            Console.WriteLine($"Starting Taco Bell:{Itrack1.Name} Ending Taco Bell:{Itrack2.Name} Longest Distance:{lognestDist}");
-
+            
+            //Convert the longestDistance using the formula; meters / 1609.344
+            Console.WriteLine($"Starting Taco Bell:{Itrack1.Name} Ending Taco Bell:{Itrack2.Name} Longest Distance: {(longestDistance / 1609.344)} miles");
             Console.ReadLine();
         }
     }

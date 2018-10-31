@@ -5,11 +5,7 @@ namespace LoggingKata.Test
 {
     public class TacoParserTests
     {
-        [Fact]
-        public void ShouldDoSomething()
-        {
-            // Currently not used
-        }
+       
 
         [Theory]
         [InlineData("34.073638, -84.677017, Taco Bell Acwort... (Free trial * Add to Cart for a full POI info)")]

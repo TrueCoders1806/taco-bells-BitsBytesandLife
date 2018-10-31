@@ -11,7 +11,7 @@ namespace LoggingKata
         
         public ITrackable Parse(string line)
         {
-            logger.LogInfo("Begin parsing");
+            //logger.LogInfo("Begin parsing");
 
             if(line == null)
             {
@@ -23,7 +23,7 @@ namespace LoggingKata
 
             // Do not fail if one record parsing fails, return null
             // If your array.Length is less than 3, something went wrong
-            if (cells.Length < 3 || cells.Length > 3)
+            if (cells.Length != 3)
             {
                 // Log that and return null
                 logger.LogWarning("The length was the array less than 3");
@@ -78,8 +78,6 @@ namespace LoggingKata
                 logger.LogWarning("Not a Valid location");
                 return null;
             }
-
-
 
             tacoBellLocation.Name = name;
             tacoBellLocation.Location = tacoBellLocationPoint;
